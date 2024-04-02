@@ -1,0 +1,45 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/get_instance.dart';
+import 'package:mvvm_watherapp_with_apis_getx/Resources/Images/image_assets.dart';
+import 'package:mvvm_watherapp_with_apis_getx/View/Components/small_container.dart';
+import 'package:mvvm_watherapp_with_apis_getx/ViewModel/Controller/days_controller.dart';
+import 'package:mvvm_watherapp_with_apis_getx/ViewModel/Controller/home_controller.dart';
+
+class SmallContainerList extends StatelessWidget {
+   SmallContainerList({super.key});
+
+  final homeController = Get.put(HomeController());
+  final controller = Get.put(DaysController());
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+       const Spacer(),
+        Obx(() => SmallContainer(
+            text: '${controller.day.value.precipprob.toInt().toString()}%',
+            image: ImageAssets.heavyRain,
+            color: Colors.white38,
+            textColor: Colors.white)
+        ),
+        const Spacer(),
+        Obx(() => SmallContainer(
+            text: '${controller.day.value.windspeed.toInt().toString()}km/h',
+            image: ImageAssets.wind,
+            color: Colors.white38,
+            textColor: Colors.white)
+        ),
+        const Spacer(),
+        Obx(() => SmallContainer(
+            text: '${controller.day.value.humidity.toInt().toString()}%',
+            image: ImageAssets.sun,
+            color: Colors.white38,
+            textColor: Colors.white)
+        ),
+        const Spacer(),
+      ],
+    );
+  }
+}
